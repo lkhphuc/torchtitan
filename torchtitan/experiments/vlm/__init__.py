@@ -6,10 +6,10 @@
 
 from dataclasses import asdict
 
-from torchtitan.components.loss import build_cross_entropy_loss
 from torchtitan.components.lr_scheduler import build_lr_schedulers
 from torchtitan.components.optimizer import build_optimizers
 from torchtitan.components.validate import build_validator
+from torchtitan.experiments.vlm.infra.loss import build_token_imbalance_ce_loss
 from torchtitan.experiments.vlm.tokenizer import build_vlm_tokenizer
 from torchtitan.models.llama3 import llama3_configs
 from torchtitan.protocols.train_spec import TrainSpec
@@ -51,6 +51,6 @@ def get_train_spec() -> TrainSpec:
         build_lr_schedulers_fn=build_lr_schedulers,
         build_dataloader_fn=build_mm_dataloader,
         build_tokenizer_fn=build_vlm_tokenizer,
-        build_loss_fn=build_cross_entropy_loss,
+        build_loss_fn=build_token_imbalance_ce_loss,
         build_validator_fn=build_validator,
     )
